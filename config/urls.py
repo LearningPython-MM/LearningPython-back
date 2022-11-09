@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #user page
     path('user/', include('user.urls')),
+    path('maze/', include('maze.urls')),
 ]
