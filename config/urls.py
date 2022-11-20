@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from user import views
+import user.views
+import maze.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #user page
+    path('', maze.views.maze, name='maze'),
     path('user/', include('user.urls')),
     path('maze/', include('maze.urls')),
+
+    path('maze.js', maze.views.maze_js, name='maze'),
+    path('maze.py', maze.views.maze_py, name='maze'),
 ]
