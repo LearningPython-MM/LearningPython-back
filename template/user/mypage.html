@@ -1,0 +1,208 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load static %}
+
+		<meta charset="utf-8" />
+		<title>🤭 a MAZEing Python 🤭</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		
+		<!-- material css -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+			type="text/css"
+			rel="stylesheet"
+			media="screen,projection"
+		/>
+
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython.min.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython_stdlib.min.js"
+		></script>
+
+
+		<!-- brython js -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ext-language_tools.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/mode-python.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/theme-chrome.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/theme-dracula.min.js"></script>
+
+		<!-- material css js-->
+		<script type="text/javascript">
+		window.addEventListener("load", function() {
+			$('.collapsible').collapsible();
+		});
+        </script> 
+	</head>
+
+	<body onload="brython(1)">
+		<!-- material css js-->
+		<script	type="text/javascript"	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+		<nav class="teal" role="navigation">
+			<div class="nav-wrapper container">
+				<!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
+				<a
+					class="brand-logo center"
+					href="https://www.youtube.com/c/KeechulJung"
+					>🤭 a MAZEing Python 🤭</a
+				>
+
+				<!-- Top nav and side nav components here
+            
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Navbar Link</a></li>
+            </ul>
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="#">Navbar Link</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            
+            --></div>
+		</nav>
+
+		<div>
+			<p></p>
+		</div>
+
+		<div class="row">
+			<div class="col offset-s1 s10">
+				<div class="row">
+					<div class="col s12 m12 l6">
+						<ul class="collapsible">
+					{% for i in "x"|rjust:"10" %}
+							<li>
+							<div class="collapsible-header">
+								<div class="col s3 m3 l3 deep-purple lighten-3">
+									<p class="center-align">date{{ forloop.counter }}</p>
+								</div>
+								<div class="col s3 m3 l3">
+									<p class="center-align">rank{{ forloop.counter }}</p>
+								</div>
+								<div class="col s3 m3 l3  lime lighten-3">
+									<p class="center-align">score{{ forloop.counter }}</p>
+								</div>
+								<div class="col s3 m3 l3">
+									<p class="center-align">code{{ forloop.counter }}</p>
+								</div>
+							</div>
+							<div class="collapsible-body"><pre>
+from collections import deque
+
+#  N, M 을 공백으로 구분하여 입력 받기
+n, m = 15, 15
+
+# 2차원 리스트의 맵 정보 입력 받기
+maze_load = [
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+	[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0],
+	[0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0],
+	[0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0],
+	[0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0],
+	[0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0],
+	[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+	[0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0],
+	[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
+	[0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0],
+	[0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0],
+	[0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0],
+	[0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+
+# 시작 인덱스
+startX = 13
+startY = 1
+
+# 방문 기록용 2차원 리스트
+check = [[0]*m for _ in range(n)]
+
+# 이동칸 기록용 2차원 리스트
+count = [[0]*m for _ in range(n)]
+
+# 상하좌우 이동용 방향
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+directions = [0, 1, 2, 3]
+
+# BFS 소스 코드 구현
+
+
+def solution():
+	# 큐(Queue) 구현을 위해 deque 라이브러리 사용
+	queue = deque()
+	moveQue = deque()
+
+	queue.append((startX, startY))
+	maze_load[startX][startY] = 2
+	isNotPop = False
+
+	# 큐가 빌 때까지 반복
+	while queue:
+		if isNotPop == False and len(moveQue) > 0:
+			moveQue.pop()
+			if len(queue) > 1:
+				moveQue.pop()
+
+		x, y = queue.popleft()
+
+		isNotPop = False
+
+		# 현재 위치에서 4가지 방향으로의 위치 확인
+		for i in range(4):
+			nx = x + dx[i]
+			ny = y + dy[i]
+
+			# 미로 찾기 공간을 벗어난 경우 무시
+			if nx < 0 or ny < 0 or nx >= n or ny >= m:
+				continue
+			# 0인 경우 괴물이므로 무시
+			if maze_load[nx][ny] == 0:
+				continue
+			# 해당 노드를 처음 방문하는 경우에만 최단 거리 기록
+			if maze_load[nx][ny] == 1:
+				maze_load[nx][ny] = maze_load[x][y] + 1
+				queue.append((nx, ny))
+				moveQue.append(i)
+				isNotPop = True
+
+	return list(moveQue)
+								
+							</pre></div>
+							</li>
+					{% endfor %}
+						</ul>
+					</div>
+					<!--
+					{% for recode in recode_list %}
+					<div class="col s12 m12 l6">
+						<div class="col s3 m3 l3">
+							<h3>{{ recode.title }}</h3>
+							<p>{{ recode.created_date }} by {{ object.author }}</p>
+							<p>{{ recode.content }}</p>
+						</div>
+					</div>
+					{% endfor %}
+					-->
+
+					<div class="col s12 m12 l6">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
