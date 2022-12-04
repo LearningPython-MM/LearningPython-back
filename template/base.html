@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>🤭 a MAZEing Python 🤭</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		
+		<!-- material css -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+			type="text/css"
+			rel="stylesheet"
+			media="screen,projection"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+		{% block static %}
+		{% endblock %}
+	</head>
+
+	<body onload="brython(1)">
+		<!-- material css js-->
+		<script	type="text/javascript"	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<!-- 네비게이션바 -->
+		{% include "nav.html" %}
+		<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+		{% block content %}
+		{% endblock %}
+		<!-- 기본 템플릿 안에 삽입될 내용 End -->
+	</body>
+</html>

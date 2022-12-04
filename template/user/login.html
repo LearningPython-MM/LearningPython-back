@@ -1,0 +1,45 @@
+<!-- login.html -->
+{% extends "base.html" %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<h1 class="center-align">Login</h1>
+	<form method="post" action="{% url 'user:login' %}">
+	{% csrf_token %}
+	{% include "form_errors.html" %}
+	<div class="valign-wrapper">
+	<div class="col offset-s2 s8">
+		<div class="row">
+			<div class="input-field col m6 offset-m3 l8 offset-l2">
+					<input id="username" type="text" class="validate" value="{{ form.username.value|default_if_none:'' }}">
+					<label for="username">ID</label>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="input-field col m5 offset-m3 l8 offset-l2">
+				<input id="password" type="password" class="validate" value="{{ form.password.value|default_if_none:'' }}">
+				<label for="password">PW</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col m6 offset-m3 l8 offset-l2">
+				<button type="submit" class="col s12 waves-effect waves-light btn">Login</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col m6 offset-m3 l8 offset-l2">
+				<a class="col s12  waves-effect waves-light btn" href="{% url 'user:join' %}">Join</a>
+			</div>
+		</div>
+	</div>
+	</div>
+	</form>
+</div>
+{% endblock %}

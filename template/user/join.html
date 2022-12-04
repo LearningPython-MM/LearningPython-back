@@ -1,0 +1,46 @@
+<!-- join.html -->
+{% extends "base.html" %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<h1 class="center-align">Join</h1>
+</div>
+<div class="row">
+	<form method="post" action="{% url 'user:login' %}">
+	{% csrf_token %}
+	<div class="row">
+		<div class="col m6 offset-m3 l8 offset-l2">
+			<div class="input-field valign-wrapper col s10">
+				<input type="text" class="validate" id="username" name="password">
+				<label for="username">Id</label>
+			</div>
+			<div class="valign-wrapper col s2">
+				<button class="waves-effect waves-light btn col s12" type="submit" pys-onClick ="">중복확인</button>
+			</div>
+		</div>
+	</div>
+
+			<div class="row">
+			<div class="input-field col m8 offset-m2 l8 offset-l2">
+			<input id="password" type="password" class="validate" name="password">
+			<label for="password">Password</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col m8 offset-m2 l8 offset-l2">
+			<input id="password" type="password" class="validate" name="password">
+			<label for="password">Password</label>
+			</div>
+			</div>
+
+			<div class="row">
+			<button class="waves-effect waves-light btn col m8 offset-m2 l8 offset-l2" type="submit" pys-onClick ="">회원가입 완료</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
