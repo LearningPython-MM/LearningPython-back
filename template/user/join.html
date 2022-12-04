@@ -10,35 +10,42 @@
 	<h1 class="center-align">Join</h1>
 </div>
 <div class="row">
-	<form method="post" action="{% url 'user:login' %}">
-	{% csrf_token %}
-	<div class="row">
-		<div class="col m6 offset-m3 l8 offset-l2">
-			<div class="input-field valign-wrapper col s10">
-				<input type="text" class="validate" id="username" name="password">
-				<label for="username">Id</label>
-			</div>
-			<div class="valign-wrapper col s2">
-				<button class="waves-effect waves-light btn col s12" type="submit" pys-onClick ="">중복확인</button>
+	<form method="post" action="{% url 'user:join' %}">
+		<div class="center-align">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+		</div>
+		<div class="row">
+			<div class="input-field col m8 offset-m2 l8 offset-l2">
+				<input type="text" class="form-control" name="username" id="username"
+					value="{{ form.username.value|default_if_none:'' }}">
+				<label for="username">사용자 이름</label>
 			</div>
 		</div>
-	</div>
-
-			<div class="row">
+		<div class="row">
 			<div class="input-field col m8 offset-m2 l8 offset-l2">
-			<input id="password" type="password" class="validate" name="password">
-			<label for="password">Password</label>
+				<input type="text" class="form-control" name="email" id="email"
+					value="{{ form.email.value|default_if_none:'' }}">
+				<label for="email">이메일</label>
 			</div>
-			</div>
-			<div class="row">
+		</div>
+		<div class="row">
 			<div class="input-field col m8 offset-m2 l8 offset-l2">
-			<input id="password" type="password" class="validate" name="password">
-			<label for="password">Password</label>
+				<input type="password" class="form-control" name="password1" id="password1"
+					value="{{ form.password1.value|default_if_none:'' }}">
+				<label for="password1">비밀번호</label>
 			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col m8 offset-m2 l8 offset-l2">
+				<input type="password" class="form-control" name="password2" id="password2"
+					value="{{ form.password2.value|default_if_none:'' }}">
+				<label for="password2">비밀번호 확인</label>
 			</div>
-
-			<div class="row">
-			<button class="waves-effect waves-light btn col m8 offset-m2 l8 offset-l2" type="submit" pys-onClick ="">회원가입 완료</button>
+		</div>
+		<div class="row">
+			<div class="input-field col m8 offset-m2 l8 offset-l2">
+        		<button type="submit" class="btn btn-primary">회원가입</button>
 			</div>
 		</div>
 	</form>
