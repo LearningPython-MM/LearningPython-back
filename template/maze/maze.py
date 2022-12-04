@@ -3,7 +3,7 @@ from browser import document, html, window, console, bind, websocket
 from browser.widgets.dialog import InfoDialog
 import stageList
 
-javascript.import_js("maze.js", alias="js_module")
+javascript.import_js("/static/maze/js/maze.js", alias="js_module")
 
 selectStage = int(document.query['stage'])
 
@@ -124,7 +124,7 @@ def draw_board():
         for j in range(0, stage.m, 1):
             tag += "<td id=x{}y{} width='{}' height='{}'".format(
                 i, j, width, width)
-            tag += "background='./image/other.png' style='background-size: cover;'>"
+            tag += "background='/static/maze/image/other.png' style='background-size: cover;'>"
             tag += "</td>"
 
         tag += "</tr></table>"
@@ -134,7 +134,7 @@ def draw_board():
 
 def change_color(x, y, imageUrl):
     id = "x{}y{}".format(x, y)
-    document[id].style.backgroundImage = "url('./image/{}.png')".format(
+    document[id].style.backgroundImage = "url('/static/maze/image/{}.png')".format(
         imageUrl)
 
 

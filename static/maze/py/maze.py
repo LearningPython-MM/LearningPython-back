@@ -4,7 +4,7 @@ from browser.widgets.dialog import InfoDialog
 
 jq = window.jQuery
 
-javascript.import_js("maze.js", alias="js_module")
+javascript.import_js("/static/maze/js/maze.js", alias="js_module")
 
 n, m = 15, 15
 

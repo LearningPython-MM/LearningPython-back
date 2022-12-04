@@ -28,19 +28,19 @@ def stageList_py(request):
     return render(request, 'maze/stageList.py.')
 
 def ground_png(request): 
-    return render(request, 'maze/ground.png')
+    return render(request, 'maze/image/ground.png')
 
 def miggyung_png(request): 
-    return render(request, 'maze/miggyung.png')
+    return render(request, 'maze/image/miggyung.png')
 
 def other_png(request): 
-    return render(request, 'maze/other.png')
+    return render(request, 'maze/image/other.png')
 
 def grace_png(request): 
-    return render(request, 'maze/grace.png')
+    return render(request, 'maze/image/grace.png')
 
 def potal_png(request): 
-    return render(request, 'maze/potal.png.')
+    return render(request, 'maze/image/potal.png.')
 
 def waterballun_png(request): 
-    return render(request, 'maze/waterballun.png.')
+    return render(request, 'maze/image/waterballun.png.')

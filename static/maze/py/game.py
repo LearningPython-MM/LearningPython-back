@@ -10,7 +10,7 @@ import browser.widgets.dialog as dialog
 
 import maze
 
-javascript.import_js("maze.js", alias="js_module")
+javascript.import_js("/static/maze/js/maze.js", alias="js_module")
 
 defaultCode = maze.get_maze_text()
 

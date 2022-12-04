@@ -114,7 +114,7 @@ function move_player(pathList, i) {
 
 function change_color(x, y, imageUrl) {
     var id = "x" + String(x) + "y" + String(y);
-    document.getElementById(id).style.backgroundImage = "url('./image/" + imageUrl + ".png')";
+    document.getElementById(id).style.backgroundImage = "url('/static/maze/image/" + imageUrl + ".png')";
 }
 
 function judge_game(result) {
