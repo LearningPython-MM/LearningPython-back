@@ -3,7 +3,7 @@ from browser import document, html, window, console, bind, websocket
 from browser.widgets.dialog import InfoDialog
 import stageList
 
-javascript.import_js("maze.js", alias="js_module")
+javascript.import_js("/static/maze/js/maze.js", alias="js_module")
 
 selectStage = int(document.query['stage'])
 
@@ -63,6 +63,10 @@ class GameResult:
         minus += codeComplex
 
         score = int(GameResult.maxScore - minus)
+
+        document["complexity"].value = codeComplex
+        document["code"].value = self.src
+        document["score"].value = score
 
         if score < 0:
             return 0

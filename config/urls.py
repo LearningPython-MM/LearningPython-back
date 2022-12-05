@@ -24,9 +24,4 @@ urlpatterns = [
     #user page
     path('user/', include('user.urls')),
     path('maze/', include('maze.urls')),
-
-    path('maze.js', maze.views.maze_js),
-    path('maze.py', maze.views.maze_py),
-    path('game.css', maze.views.game_css),
-    path('game.py', maze.views.game_py),
 ]

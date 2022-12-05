@@ -10,6 +10,7 @@ var $module = {
 var buildTime = 0.0
 var score = 0
 var messege = ""
+var codeComplex = 0
 
 var map = [[]]
 var nowX = 0
@@ -139,6 +140,7 @@ function show_result_modal(result, score) {
         } else {
             document.getElementById("maze-time").textContent = "다음엔 점수를 더 올려보는거 어때요?"
         }
+        result_save()
     } else {
         document.getElementById("modal-title").textContent = "미로 탈출 실패 😢 "
         document.getElementById("maze-score").textContent = "코드 점수: " + score
@@ -151,3 +153,4 @@ function show_result_modal(result, score) {
     modal = M.Modal.init(elems, {})
     modal.open()
 }
+

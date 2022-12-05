@@ -64,6 +64,9 @@ class GameResult:
 
         score = int(GameResult.maxScore - minus)
 
+        document.getElementById('codeComplex').value = codeComplex
+        document.getElementById('score').value = score
+
         if score < 0:
             return 0
 

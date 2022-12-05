@@ -39,7 +39,34 @@
 			type="text/javascript"
 			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython_stdlib.min.js"
 		></script>
+		<script
+			type="text/javascript">
+		function result_save(){
+			var user_id = document.getElementById("user_id").value;
+			var stage_level = document.getElementById("stage_level").value;
+			var score = document.getElementById("score").value;
+			var code = document.getElementById("code").value;
+			var complexity = document.getElementById("complexity").value;
 		
+			$.ajax({
+				type: 'POST',
+				url: '/maze/result_save',
+				data: {
+					'user_id':user_id,
+					'stage_level':stage_level,
+					'score':score,
+					'code':code,
+					'complexity':complexity,
+				},
+				datatype: 'json',
+				success: function(data){
+					console.log("success");
+				},error: function (request, status, error) {
+					console.log('i am failed');
+				}
+			})
+		}
+	</script>
 	</head>
 
 	<body onload="brython(1)">
@@ -77,16 +104,17 @@
 				>
 			</div>
 		</div>
+		<form>
+			{% csrf_token %}
+			<input type="hidden" id="user_id" name="user_id" value="{{ user.username }}">
+			<input type="hidden" id="stage_level" name="stage_level" value="{{ stage }}">
+			<input type="hidden" id="score" name="score" >
+			<input type="hidden" id="code" name="code" >
+			<input type="hidden" id="complexity" name="complexity">
+		</form>
 
-		<nav class="teal" role="navigation">
-			<div class="nav-wrapper container">
-				<a
-					class="brand-logo center"
-					href="/maze/stageList"
-					>🤭 A MAZEing Python 🤭</a
-				>
-			</div>
-		</nav>
+		<!-- 네비게이션바 -->
+		{% include "nav.html" %}
 
 		<div><p></p></div>
 

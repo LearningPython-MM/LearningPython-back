@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_exempt
+from user.models import Record
 
 def stageList(request): 
     return render(request, 'maze/stageList.html')
@@ -12,35 +13,30 @@ def game(request):
     except ValueError :
         return render(request, 'mage/stageList.html')
 
-def maze_js(request): 
-    return render(request, 'maze/maze.js')
+@csrf_exempt
+def result_save(request): 
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        stage_level = request.POST.get('stage_level')
+        score = request.POST.get('score')
+        code = request.POST.get('code')
+        complexity = request.POST.get('complexity')
+        record = Record(
+            user_id = user_id,
+            stage_level = stage_level,
+            record_score = score,
+            record_code = code,
+            record_complexity = complexity,
+        )
+        record.save()
+        return render(request, 'mage/stageList')
+
 
 def maze_py(request): 
     return render(request, 'maze/maze.py')
-
-def game_css(request): 
-    return render(request, 'maze/game.css')
 
 def game_py(request): 
     return render(request, 'maze/game.py')
 
 def stageList_py(request): 
     return render(request, 'maze/stageList.py')
-
-def ground_png(request): 
-    return render(request, 'maze/image/ground.png')
-
-def miggyung_png(request): 
-    return render(request, 'maze/image/miggyung.png')
-
-def other_png(request): 
-    return render(request, 'maze/image/other.png')
-
-def grace_png(request): 
-    return render(request, 'maze/image/grace.png')
-
-def potal_png(request): 
-    return render(request, 'maze/image/potal.png.')
-
-def waterballun_png(request): 
-    return render(request, 'maze/image/waterballun.png.')

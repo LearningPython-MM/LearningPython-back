@@ -1,15 +1,13 @@
 <nav class="teal" role="navigation">
 	<div class="nav-wrapper container">
 		<!-- <a id="logo-container" href="#" class="brand-logo">Logo</a> -->
-		<a
-			class="brand-logo center"
-			href="https://www.youtube.com/c/KeechulJung"
-			>🤭 A MAZEing Python 🤭</a
-		>
+		<a class="brand-logo center" href="https://www.youtube.com/c/KeechulJung">🤭</a> 
+		<a class="center" href="{% url 'user:home' %}">A MAZEing Python</a>	 
+		<a class="brand-logo center" href="https://www.youtube.com/c/KeechulJung">🤭</a> 
+	
 		<ul id="nav-user" class="right">
-			<li><a href="{% url 'user:home' %}">Home</a></li>
 			{% if user.is_authenticated %}
-			<li>{{ user.username }}</li> 
+			<li><a href="{% url 'user:mypage' %}">{{ user.username }}</a></li> 
 			<li><a href="{% url 'user:logout' %}">logout</a></li>
 			{% else %}
 			<li><a href="{% url 'user:login' %}">login</a></li>

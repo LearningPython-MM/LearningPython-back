@@ -9,9 +9,10 @@ class UserInfo(models.Model):
 
 
 class Record(models.Model):
-    record_num = models.IntegerField( primary_key=True)
+    record_num = models.AutoField( primary_key=True)
     user_id = models.CharField(max_length=5)
     stage_level = models.IntegerField()
+    record_score = models.IntegerField(null=True)
     record_code = models.CharField(max_length=3000)
     record_complexity = models.IntegerField()
     record_time = models.CharField(max_length=20)
