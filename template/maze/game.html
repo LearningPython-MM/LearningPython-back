@@ -23,17 +23,6 @@
 			src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
 		></script>
 
-		<script
-			type="text/javascript"
-			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython.min.js"
-		></script>
-		<script
-			type="text/javascript"
-			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython_stdlib.min.js"
-		></script>
-	</head>
-
-	<body onload="brython(1)">
 		<!-- brython js -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.min.js"></script>
@@ -42,9 +31,22 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/theme-chrome.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/theme-dracula.min.js"></script>
 
-		<script type="text/python" src="{% static 'maze/py/game.py' %}"></script>
-		<script type="text/javascript" src="{% static 'maze/js/maze.js' %}"></script>
-		<link type="stylesheet" src="{% static 'maze/css/game.css' %}">
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython.min.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.7/brython_stdlib.min.js"
+		></script>
+		
+	</head>
+
+	<body onload="brython(1)">
+
+		<script type="text/python" src="{% static '/maze/py/game.py' %}"></script>
+		<script type="text/javascript" src="{% static '/maze/js/maze.js' %}"></script>
+		<link rel="stylesheet" href="{% static '/maze/css/game.css' %}">
 
 		<!-- Modal Structure -->
 		<div id="modal1" class="modal" style="z-index: 100; position: absolute">
@@ -56,10 +58,22 @@
 			</div>
 			<div class="modal-footer">
 				<a
-					id="btn_done"
+					id="btn_replay"
 					href="#!"
 					class="modal-close waves-effect waves-green btn-flat"
-					>확인</a
+					>다시하기</a
+				>
+				<a
+					id="btn_next"
+					href="/maze/stageList"
+					class="modal-close waves-effect waves-green btn-flat"
+					>스테이지 선택 화면으로 가기</a
+				>
+				<a
+					id="btn_mypage"
+					href="#!"
+					class="modal-close waves-effect waves-green btn-flat"
+					>히스토리 확인하기</a
 				>
 			</div>
 		</div>
@@ -68,7 +82,7 @@
 			<div class="nav-wrapper container">
 				<a
 					class="brand-logo center"
-					href="stage/stageList.html"
+					href="/maze/stageList"
 					>🤭 A MAZEing Python 🤭</a
 				>
 			</div>
@@ -81,6 +95,7 @@
 				<div class="row">
 					<div class="col s12 m12 l6">
 						<div class="row">
+							<a id="btn_playing" class="btn">Running...</a>
 							<a id="btn_run" class="btn">Run</a>
 							<a
 								id="btn_clear"

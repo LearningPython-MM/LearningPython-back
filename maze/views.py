@@ -25,7 +25,7 @@ def game_py(request):
     return render(request, 'maze/game.py')
 
 def stageList_py(request): 
-    return render(request, 'maze/stageList.py.')
+    return render(request, 'maze/stageList.py')
 
 def ground_png(request): 
     return render(request, 'maze/image/ground.png')

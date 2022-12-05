@@ -3,7 +3,7 @@ from browser import document, html, window, console, bind, websocket
 from browser.widgets.dialog import InfoDialog
 import stageList
 
-javascript.import_js("/static/maze/js/maze.js", alias="js_module")
+javascript.import_js("maze.js", alias="js_module")
 
 selectStage = int(document.query['stage'])
 
@@ -34,19 +34,20 @@ class GameResult:
         minus = 0
 
         # queue를 써야하는데 안쓰면 - 10
-        if stage.isNeedQueue & (('import deque' in self.src) == False):
+        if stage.isNeedQueue and (('import deque' in self.src) == False):
             minus += 30
-            self.noti += "\n✅ 큐를 이용해보세요!"
+            self.noti += "<p>✅ 큐를 이용해보세요!</p>"
 
         # 반복문 써야하는데 안쓰면 - 10
         if self.codeLoof < stage.minLoofCnt:
             minus += 30
-            self.noti += "\n✅ 반복문을 {}개 이상 사용해보세요!".format(stage.minLoofCnt)
+            self.noti += "<p>✅ 반복문을 {}개 이상 사용해보세요!</p>".format(
+                stage.minLoofCnt)
 
         # 분기문 써야하는데 안쓰면 - 10
         if self.codeCondition < stage.minConditionCnt:
             minus += 30
-            self.noti += "\n✅ 분기분을 {}개 이상 사용해보세요!".format(
+            self.noti += "<p>✅ 분기문을 {}개 이상 사용해보세요!</p>".format(
                 stage.minConditionCnt)
 
         # 코드 줄수 + 루프 수 * 2 + (코드 분기문 + 1)
@@ -115,28 +116,34 @@ def draw_board():
 
     tag = ""
 
-    _width_maze = int((document.documentElement.clientWidth / 2) - 150)
+    _width_maze = int((document.documentElement.clientWidth / 2) - 80)
     width = _width_maze / stage.m
 
-    for i in range(0, 15, 1):
-        tag += "<table bgcolor='black' border='1'><tr>"
+    tag += "<table>"
+
+    for i in range(0, stage.m, 1):
+        tag += "<tr>"
 
         for j in range(0, stage.m, 1):
-            tag += "<td id=x{}y{} width='{}' height='{}'".format(
-                i, j, width, width)
-            tag += "background='/static/maze/image/other.png' style='background-size: cover;'>"
+            tag += "<td width='{}' height='{}'".format(width, width)
+            tag += "background='/static/maze/image/ground.png' style='background-size: cover; padding: 0; margin: 0;'>"
+            tag += "    <img id=x{}y{} src='/static/maze/image/other.png' style='max-width: 100%; display:block;'/>".format(
+                i, j)
             tag += "</td>"
 
-        tag += "</tr></table>"
+        tag += "</tr>"
+
+    tag += "</table>"
 
     document["maze-div"].innerHTML += tag
 
-
 def change_color(x, y, imageUrl):
     id = "x{}y{}".format(x, y)
-    document[id].style.backgroundImage = "url('/static/maze/image/{}.png')".format(
-        imageUrl)
-
+    if imageUrl == "ground":
+        document[id].style.display = "none"
+    else:
+        document[id].style.display = "inherit"
+        document[id].src = "/static/maze/image/{}.png".format(imageUrl)
 
 def load_maze():
     global stage
