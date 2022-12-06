@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 from user.models import Record
 
 def stageList(request): 
@@ -27,9 +28,13 @@ def result_save(request):
             record_score = score,
             record_code = code,
             record_complexity = complexity,
+            record_date = timezone.now()
         )
-        record.save()
-        return render(request, 'mage/stageList')
+        succ = record.save()
+        return JsonResponse({"instance":succ}, status=200)
+    else:
+            # some form errors occured.
+        return JsonResponse({"error": "Error"}, status=400)
 
 
 def maze_py(request): 

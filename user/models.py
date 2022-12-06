@@ -16,7 +16,7 @@ class Record(models.Model):
     record_code = models.CharField(max_length=3000)
     record_complexity = models.IntegerField()
     record_time = models.CharField(max_length=20)
-    record_date = models.CharField(max_length=20)
+    record_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

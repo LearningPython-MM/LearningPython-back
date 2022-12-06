@@ -22,6 +22,7 @@ import maze.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     #user page
+    path('', user.views.home),
     path('user/', include('user.urls')),
     path('maze/', include('maze.urls')),
 ]
